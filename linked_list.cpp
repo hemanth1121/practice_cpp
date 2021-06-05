@@ -37,6 +37,21 @@ class CLinkedList
         }
     }
     
+    void insertAtBegin(int val)
+    {
+        cout << __func__ << endl;
+        if(nullptr == head)
+        {
+            head = new Node(val);
+            cout << head->data << endl;
+        }
+        else
+        {
+            Node *temp = new Node(val);
+            temp->next = head;
+            head = temp;
+        }
+    }
     bool bIsEmpty()
     {
         bool isEmpty;
@@ -75,6 +90,13 @@ int main()
     for(auto i=0; i<5; ++i)
     {
         lists.insertAtEnd(i);
+    }
+    
+    lists.print();
+    
+    for(auto i=10; i>5; --i)
+    {
+        lists.insertAtBegin(i);
     }
     
     lists.print();
