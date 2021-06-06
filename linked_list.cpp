@@ -21,7 +21,7 @@ class CLinkedList
     public:
     void insertAtEnd(int val)
     {
-        cout << __func__ << endl;
+        //cout << __func__ << endl;
         if(nullptr == head)
         {
             head = new Node(val);
@@ -39,7 +39,7 @@ class CLinkedList
     
     void insertAtBegin(int val)
     {
-        cout << __func__ << endl;
+        //cout << __func__ << endl;
         if(nullptr == head)
         {
             head = new Node(val);
@@ -52,6 +52,33 @@ class CLinkedList
             head = temp;
         }
     }
+    
+    // insert val after the first occurence of key
+    void insertAfter(int val, int key)
+    {
+        cout << __func__ << endl;
+        if(bIsEmpty())
+        {
+            cout << " list is empty, so not adding key" << endl;
+        }
+        else
+        {
+            Node *temp = head;
+            while(temp != nullptr)
+            {
+                if(key == temp->data)
+                {
+                    Node *nextNode = temp->next;
+                    temp->next = new Node(val);
+                    //temp = temp->next;
+                    temp->next->next = nextNode;
+                    break;
+                }
+                temp = temp->next;
+            }
+        }
+    }
+    
     bool bIsEmpty()
     {
         bool isEmpty;
@@ -67,15 +94,15 @@ class CLinkedList
         }
         else
         {
-        Node *temp = head;
-        cout << " ********** Displaying list elements *************" << endl;
-        do 
-        {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }while(nullptr != temp);
-        cout << endl;
-        }
+            Node *temp = head;
+            cout << " ********** Displaying list elements *************" << endl;
+            do 
+            {
+                cout << temp->data << " ";
+                temp = temp->next;
+            }while(nullptr != temp);
+            cout << endl;
+            }
     }
     private:
     Node *head{nullptr};
@@ -99,5 +126,8 @@ int main()
         lists.insertAtBegin(i);
     }
     
+    lists.print();
+    
+    lists.insertAfter(5, 4);
     lists.print();
 }
