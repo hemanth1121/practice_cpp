@@ -159,6 +159,57 @@ class CLinkedList
         }
     }
     
+    void middleElement()
+    {
+        cout << __func__ << endl;
+        if(bIsEmpty())
+        {
+            cout << " list is empty, so no middle element" << endl;
+            return;
+        }
+        else
+        {
+            Node *fastPtr = head;
+            Node *slowPtr = head;
+            while(nullptr != fastPtr && nullptr != fastPtr->next)
+            {
+                fastPtr = fastPtr->next->next;
+                slowPtr = slowPtr->next;
+            }
+            cout << "middle element is " << slowPtr->data << endl;
+        }
+    }
+    
+    void middleElementLowerEnd()
+    {
+        cout << __func__ << endl;
+        if(bIsEmpty())
+        {
+            cout << " list is empty, so no middle element" << endl;
+            return;
+        }
+        else if(nullptr == head->next)
+        {
+            cout << "middle element is " << head->data << endl;
+        }
+        else
+        {
+            Node *fastPtr = head->next;
+            Node *slowPtr = head;
+            while(nullptr != fastPtr )
+            {
+                fastPtr = fastPtr->next;
+                if(nullptr == fastPtr)
+                {
+                    break;
+                }
+                fastPtr = fastPtr->next;
+                slowPtr = slowPtr->next;
+            }
+            cout << "middle element is " << slowPtr->data << endl;
+        }
+    }
+    
     bool bIsEmpty()
     {
         bool isEmpty;
@@ -227,5 +278,20 @@ int main()
     lists.print();
     
     lists.deleteNthNodeFromEnd(9);
+    lists.print();
+    
+    lists1.insertAtEnd(1);
+    lists1.insertAtEnd(2);
+    lists1.insertAtEnd(3);
+    lists1.insertAtEnd(4);
+    lists1.print();
+    lists1.middleElement();
+    lists1.middleElementLowerEnd();
+    lists1.print();
+    
+    
+    lists.print();
+    lists.middleElement();
+    lists.middleElementLowerEnd();
     lists.print();
 }
