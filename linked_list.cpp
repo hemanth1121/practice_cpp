@@ -87,10 +87,11 @@ class CLinkedList
         {
             cout << " list is empty, so not able to delete any key" << endl;
         }
-        else if(nullptr == head->next && key == head->data)
+        else if(key == head->data)
         {
+            Node *temp = head->next;
            delete head;
-           head = nullptr;
+           head = temp;
         }
         else
         {
@@ -100,7 +101,7 @@ class CLinkedList
             {
                 if(key == temp->data)
                 {
-                    prevNode->next = nullptr;
+                    prevNode->next = temp->next;
                     delete temp;
                     break;
                 }
@@ -217,6 +218,25 @@ class CLinkedList
         return isEmpty;
     }
     
+    void reverse()
+    {
+        if(bIsEmpty())
+        {
+           cout << " ********** list is empty, no elements to reverse *************" << endl; 
+        }
+        else
+        {
+            Node* prev = nullptr, *curr = head, *next = nullptr;
+            while(nullptr != curr)
+            {
+                next = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = next;
+            }
+            head = prev;
+        }
+    }
     void print()
     {
         if(bIsEmpty())
@@ -243,7 +263,7 @@ int main()
 {
     cout << "*********************** linked list program in c++***************************" << endl;
     
-    CLinkedList lists, lists1;
+    CLinkedList lists, lists1, lists2;
     lists.print();
     lists.deleteNode(5);
     for(auto i=0; i<5; ++i)
@@ -294,4 +314,14 @@ int main()
     lists.middleElement();
     lists.middleElementLowerEnd();
     lists.print();
+    
+    lists2.insertAtEnd(1);
+    lists2.insertAtEnd(2);
+    lists2.insertAtEnd(3);
+    lists2.insertAtEnd(4);
+    lists2.deleteNode(3);
+    lists2.print();
+    
+    lists2.reverse();
+    lists2.print();
 }
